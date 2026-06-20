@@ -3,10 +3,32 @@ import React, { useState, useEffect } from "react";
 import Navegacao from "../components/Navegacao";
 import Janela from "../components/Janela";
 
+import ObterCarrinho from "../functions/ObterCarrinho";
+import Pagamento from "../functions/Pagamento";
+import ProdutosExemplo from "../datas/ProdutosExemplo";
+
 
 export default function Carrinho() {
     const [carrinho, definirCarrinho] = useState([]);
     const [preco, definirPreco] = useState(0);
+
+    useEffect(function() {
+        const resultado = ObterCarrinho();
+        definirCarrinho(resultado);
+    }, []);
+
+    useEffect(function() {
+        var total = 0;
+        carrinho.map(function(codigo) {
+            for (const produto of ProdutosExemplo) {
+                if (produto.codigo == codigo) {
+                    total += parseInt(produto.preco);
+                }
+            }
+        })
+        definirPreco(total);
+    }, [carrinho]);
+
     return (
         <>
         <Navegacao titulo="CARRINHO">
@@ -16,7 +38,7 @@ export default function Carrinho() {
                     </Navegacao>
 
                     <Janela>
-                        <h1>Total R$ 6700,00</h1>
+                        <h1>Total R$ {preco},00</h1>
                         <table width= "100%">
                             <tbody>
                                 <tr>
