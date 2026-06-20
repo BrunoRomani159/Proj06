@@ -1,25 +1,24 @@
 import React from "react";
-import { useParams } from "react-router-dom"
+import { useParams } from "react-router-dom";
 
-import Navegacao from "../components/Navegacao";
-import Exibidor from "../components/Exibidor";
+import Navegacao from "../components/Navegacao.jsx";
+import Exibidor from "../components/Exibidor.jsx";
 
-import ProdutosExemplo from "../datas/ProdutosExemplo";
+import ProdutosExemplo from "../datas/ProdutosExemplo.js";
 
 export default function Produto() {
     const { codigo } = useParams()
-    
-    const produtoEncontrado = ProdutosExemplo.find((produto) => produto.codigo == produto) || {}
+    const produtoEncontrado = ProdutosExemplo.find((produto) => produto.codigo == codigo) || {}
 
-    return(
+    return (
         <>
-        <Navegacao titulo="Vitrine" >
-                    <a href="/"> Início </a>
-                    <a href="/Promocao"> Promocao </a>
-                    <a href="/Carrinho"> Carrinho </a>
-                </Navegacao>
+            <Navegacao titulo="PRODUTO">
+                <a href="/"> Início </a>
+                <a href="/promocao"> Promoção </a>
+                <a href="/carrinho"> Carrinho </a>
+            </Navegacao>
 
-            < Exibidor produto={ProdutoEncontrado}/>
+            <Exibidor produto={produtoEncontrado} />
         </>
     )
 }
