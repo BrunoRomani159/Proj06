@@ -5,7 +5,7 @@ import Janela from "../components/Janela";
 
 import ObterCarrinho from "../functions/ObterCarrinho";
 import Pagamento from "../functions/Pagamento";
-import ProdutosExemplo from "../datas/ProdutosExemplo";
+import ProdutosExemplo from "../datas/ProdutosExemplo.js";
 
 
 export default function Carrinho() {
@@ -46,8 +46,24 @@ export default function Carrinho() {
                                     <th>Modelo</th>
                                     <th>Preço</th>
                                 </tr>
+                                    {
+                                        ProdutosExemplo.length > 0 && carrinho.map(function(codigo, indice) {
+                                            for (const produto of ProdutosExemplo) {
+                                                if (produto.codigo == codigo) {
+                                                     <tr key={indice}>
+                                                        <td>{produto.codigo}</td>
+                                                        <td>{produto.modelo}</td>
+                                                        <td> R$ {produto.preco},00</td>
+                                                     </tr>
+                                                }
+                                            }
+                                        })
+                                     }
+
                             </tbody>
                         </table>
+                        <br/>
+                        <button onClick={Pagamento}>Pagamento por PIX</button>
                     </Janela>
         </>
     )

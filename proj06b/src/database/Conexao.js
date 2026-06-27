@@ -3,11 +3,12 @@ import "dotenv/config";
 
 const endereco = process.env.MONGO_URI;
 
-const configuracao = {
-    useNewUrlParser = true,
-    useUnifiedTopology: true
-}
 
-mongoose.connect(endereco, configuracao, function() {
-    console.log("CONECTADO COM O BANCO DE DADOS!")
-})
+
+mongoose.connect(endereco)
+    .then(() => {
+        console.log("Conexão com o banco de dados estabelecida com sucesso!");
+    })
+    .catch((erro) => {
+        console.log("Erro ao conectar com o banco de dados: ", erro.message);
+    })
